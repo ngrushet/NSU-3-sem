@@ -68,5 +68,25 @@ arg(z1)*arg(z2) = arg(z1) + arg(z2) + 2pim, arg (z1*z2) принадл (-pi, pi]
 z in C , n in N, z = r(cos(fi) + i sin(fi))
 z^n := z * ... * z (n раз) = r^n ( cos (n*fi) + i sin (n*fi)) ( k различных значений корня)
 
-a := 
+a := sqrt^n(z), если  a^n = z
+
+sqrt^n(z) = sqrt^n(abs(z)) (cos ((arg z + 2 k pi)/n) + i sin ((arg z  + 2k pi)/n) - формула Муавра
+0 <= k <= n-1
+
+Важные неравенства треугольника
+
+||z1| - |z2|| <= |z1 + z2| <= |z1| + |z2|
+
+|z1 - z2| - расстояние между точками
+
+________________________----
+
+Поле комплексных чисел C изоморфного полю матриц вида
+
+(x -y)  , (x, y in R)
+(y  x)
+
+E1 -fi-> E2 for all x,y in E1:
+fi(x+y) = fi(x) + fi(y)
+fi(x*y) = fi(x) * fi(y)
 
