@@ -37,7 +37,7 @@ class String {
         }
 
     // operators
-        String operator= (const String & other) {  // operator "="
+        String operator = (const String & other) {  // operator "="
             length = other.length;
             byte = other.byte;
             return * this;
@@ -48,7 +48,7 @@ class String {
         }
         
         // for 4 mark:
-        String operator+ (const String & second) const {  // concatination of Strings
+        String operator + (const String & second) const {  // concatination of Strings
             String result;
             result.length = length + (second.length);
             result.byte = (char *) realloc (result.byte, result.length);
@@ -61,19 +61,20 @@ class String {
             return result;
         }
 
-        // String operator+= (const String & second) {  
-        //     this = result;
-        // }
+        String operator += (const String & second) {  // concatination using "+="
+        *this = *this + second;
+        return *this;
+    }
 };
 
 int main() {
     char a[15] = "supernova_plus";
 
-    cout << "\nEmpty:\n";
+    cout << "\nCreate Empty:\n";
     String empty;
-    empty.getInfo();
+    empty.getInfo(); 
 
-    cout << "\nFrom char *:\n";
+    cout << "\nCreate From char *:\n";
     String copy_chars = String(a); 
         /* what happened, explain: 
             on the left side of '=', 'copy_chars' "String" object is already constructed empty. 
@@ -84,7 +85,7 @@ int main() {
         */
     copy_chars.getInfo();
 
-    cout << "\nFrom String:\n";
+    cout << "\nCopy From String:\n";
     String copy_String = String(copy_chars);
     copy_String.getInfo();
 
@@ -92,11 +93,24 @@ int main() {
     String new_str = copy_chars;
     new_str.getInfo();
 
-    cout << "\nConcat:\n";
+    cout << "\nFrom String to const char *:\n";
+    cout << (const char *) new_str << endl;
+
+    // for "4" mark:
+    cout << "\nConcat using '+':\n";
     String sum = copy_chars + copy_String;
     sum.getInfo();
 
-    cout << "\nFrom String to const char *:\n";
-    // char fromString[10] = const char * (String("Hellowold")); 
+    cout << "\nConcat using '+=':\n";
+    copy_chars += copy_String;
+    copy_chars.getInfo();
+    
+    cout << "\nBonus: multiplication of operators and constructors:"<< endl;
+    const char* fromString;
+    fromString = (const char *) (String("Hellowold")+String("+another_Hello")); 
+    cout << fromString << endl;
     return 0;    
+
+    // and for "5" mark:
+
 }
