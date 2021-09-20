@@ -9,7 +9,8 @@ class String {
     // constructors:
         String() {  // constuctor of empty String
             length = 0;
-            byte = (char *) malloc ((length) * sizeof(char));
+            //byte = (char *) malloc ((length) * sizeof(char));
+            byte = new char[length];
         }
 
         String(char * array_of_chars) {  // constructs from "char*" type
@@ -28,7 +29,9 @@ class String {
         }
 
     // destructor:
-        ~String() { };
+        ~String() {
+            //delete byte;
+        };
 
     // outputs: 
         void getInfo() {
@@ -51,7 +54,8 @@ class String {
         String operator + (const String & second) const {  // concatination of Strings
             String result;
             result.length = length + (second.length);
-            result.byte = (char *) realloc (result.byte, result.length);
+            result.byte = new char[result.length]; 
+            /*(char *) realloc (result.byte, result.length);*/
             for (int i = 0; i < length; i++) {
                 result.byte[i] = byte[i];
             }
@@ -64,7 +68,23 @@ class String {
         String operator += (const String & second) {  // concatination using "+="
         *this = *this + second;
         return *this;
-    }
+        }
+
+        // for '5'mark:
+
+        const char * operator[] (const int index) const {  // read byte with index = @index@
+            switch (index>=0) {
+                case 1: return (const char *)(this);
+                default: throw "incorrect index"; 
+            }
+        }
+
+        char& operator[] (const int index) {  // change byte with index = @index@
+            switch (index>=0) {
+                case 1: return this->byte[index];
+                default: throw "incorrect index"; 
+            }
+        }
 };
 
 int main() {
@@ -105,12 +125,26 @@ int main() {
     copy_chars += copy_String;
     copy_chars.getInfo();
     
-    cout << "\nBonus: multiplication of operators and constructors:"<< endl;
-    const char* fromString;
-    fromString = (const char *) (String("Hellowold")+String("+another_Hello")); 
-    cout << fromString << endl;
-    return 0;    
-
+    
+    // cout << "\nBonus: multiplication of operators and constructors:"<< endl;
+    // const char* fromString;
+    // fromString = (const char *) (String("Hellowold")+String("+another_Hello")); 
+    // cout << fromString << endl;
+    
     // and for "5" mark:
 
+    int n = 5;
+    cout << "\nReading the String[" << n <<"] element:" << endl;
+    copy_String.getInfo();
+    cout << copy_String[n] << endl;
+    
+    n = 3;
+    char change = 'B';
+    cout << "\nChanging the String[" << n <<"] element:" << endl;
+    copy_String.getInfo();
+    copy_String[n] = change;
+    cout << copy_String[n] << endl;
+    copy_String.getInfo();
+    
+    return 0;
 }
